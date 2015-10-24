@@ -1,16 +1,54 @@
 package edu.mobidev.labnotesdatabase;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class AddNoteActivity extends AppCompatActivity {
+
+    EditText etTitle;
+    EditText etNote;
+    ImageButton buttonSave;
+    ImageButton buttonCancel;
+
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
+
+        dbHelper = new DatabaseHelper(getBaseContext(), "", null, -1);
+        // last 3 parameters will be overridden in DatabaseHelper's constructor
+
+        etTitle = (EditText) findViewById(R.id.et_title);
+        etNote = (EditText) findViewById(R.id.et_note);
+        buttonSave = (ImageButton) findViewById(R.id.button_save);
+        buttonCancel = (ImageButton) findViewById(R.id.button_cancel);
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Note note = new Note();
+                note.setTitle(etTitle.getText().toString());
+                note.setNote(etNote.getText().toString());
+                dbHelper.addNote(note);
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
     }
 
     @Override
