@@ -24,6 +24,10 @@
             android:name=".ViewNoteActivity"
             android:label="@string/title_activity_view_bookmark" >
         </activity>
+        <activity
+            android:name=".EditNoteActivity"
+            android:label="@string/title_activity_edit_note" >
+        </activity>
     </application>
 
 </manifest>
