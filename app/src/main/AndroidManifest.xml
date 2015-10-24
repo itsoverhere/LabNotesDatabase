@@ -17,8 +17,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddBookmarkActivity"
+            android:name=".AddNoteActivity"
             android:label="@string/title_activity_add_bookmark" >
+        </activity>
+        <activity
+            android:name=".ViewNoteActivity"
+            android:label="@string/title_activity_view_bookmark" >
         </activity>
     </application>
 

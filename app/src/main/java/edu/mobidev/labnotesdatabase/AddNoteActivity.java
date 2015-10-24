@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class AddBookmarkActivity extends AppCompatActivity {
+public class AddNoteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_bookmark);
+        setContentView(R.layout.activity_add_note);
     }
 
     @Override
