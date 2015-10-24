@@ -8,11 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button_add"
-            android:layout_alignParentRight="true"/>
+            android:src="@drawable/ic_action_new"
+            android:layout_alignParentRight="true"
+            android:background="#6a973d"
+            android:padding="5sp"/>
 
     </RelativeLayout>
 

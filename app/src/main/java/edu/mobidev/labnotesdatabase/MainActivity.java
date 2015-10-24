@@ -7,17 +7,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADD = 0;
-    // public static final int REQUEST_CODE_VIEW = 1; // if the user updates/edits the note, we need to notify the adapter
+    public static final int REQUEST_CODE_VIEW = 1; // if the user updates/edits the note, we need to notify the adapter
     public static final int RESULT_EDITED = 2;
 
     ListView lvNotes;
-    Button buttonAdd;
+    ImageButton buttonAdd;
     NoteAdapter noteAdapter;
     DatabaseHelper dbHelper;
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         lvNotes = (ListView) findViewById(R.id.lv_notes);
-        buttonAdd = (Button) findViewById(R.id.button_add);
+        buttonAdd = (ImageButton) findViewById(R.id.button_add);
 
         dbHelper = new DatabaseHelper(getBaseContext(), "", null, -1);
         // the last three parameters will be overriden anyway
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getBaseContext(), ViewNoteActivity.class);
                 intent.putExtra(Note.COLUMN_ID, (int)((Note)parent.getItemAtPosition(position)).getId());
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_ADD);
             }
         });
     }
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if((requestCode == REQUEST_CODE_ADD && resultCode == RESULT_OK) // if a new entry was added
-            || (resultCode == RESULT_EDITED) ){ // if a note was viewed and edited, we have to update the title
+            || (requestCode == REQUEST_CODE_ADD && resultCode == RESULT_EDITED) ){ // if a note was viewed and edited, we have to update the title
             // in both scenarios, we have to update the list to the latest database records
             noteAdapter.clear();
             noteAdapter.addAll(dbHelper.getAllNotes());

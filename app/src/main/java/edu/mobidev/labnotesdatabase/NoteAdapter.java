@@ -22,8 +22,6 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         this.noteArrayList = noteArrayList;
     }
 
-    TextView tvNote;
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // return super.getView(position, convertView, parent);
@@ -31,11 +29,12 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             convertView = ((LayoutInflater)getContext().getSystemService(Service.LAYOUT_INFLATER_SERVICE))
                             .inflate(R.layout.note_item, parent, false);
 
-            tvNote = (TextView) convertView.findViewById(R.id.tv_note);
-            convertView.setTag(0, tvNote); // set 0 as the tag of tvNote
+            TextView tvNote = (TextView) convertView.findViewById(R.id.tv_title);
+            convertView.setTag(tvNote);
         }
 
-        ((TextView)convertView.getTag(0)).setText(getItem(position).getTitle());
+        ((TextView)convertView.getTag()).setText(
+                getItem(position).getTitle());
 
         return convertView;
     }
