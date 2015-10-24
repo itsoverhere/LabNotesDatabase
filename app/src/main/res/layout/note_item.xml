@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_title"
         android:textColor="#222222"
+        android:textSize="25sp"
         android:padding="5sp"/>
 
 </LinearLayout>

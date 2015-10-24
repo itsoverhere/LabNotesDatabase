@@ -18,11 +18,11 @@
         </activity>
         <activity
             android:name=".AddNoteActivity"
-            android:label="@string/title_activity_add_bookmark" >
+            android:label="@string/title_activity_add_note" >
         </activity>
         <activity
             android:name=".ViewNoteActivity"
-            android:label="@string/title_activity_view_bookmark" >
+            android:label="@string/title_activity_view_note" >
         </activity>
         <activity
             android:name=".EditNoteActivity"

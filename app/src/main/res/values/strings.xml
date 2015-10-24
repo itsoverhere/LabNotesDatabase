@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">LabNotesDatabase</string>
+    <string name="app_name">Notes</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_add_bookmark">AddBookmarkActivity</string>
-    <string name="title_activity_view_bookmark">ViewBookmarkActivity</string>
-    <string name="title_activity_edit_note">EditNoteActivity</string>
+    <string name="title_activity_add_note">Add a note</string>
+    <string name="title_activity_view_note">Your note</string>
+    <string name="title_activity_edit_note">Edit your note</string>
 </resources>
