@@ -36,7 +36,7 @@ public class AddNoteActivity extends AppCompatActivity {
                 Note note = new Note();
                 note.setTitle(etTitle.getText().toString());
                 note.setNote(etNote.getText().toString());
-                dbHelper.addNote(note);
+                dbHelper.insertNote(note);
                 setResult(RESULT_OK);
                 finish();
             }

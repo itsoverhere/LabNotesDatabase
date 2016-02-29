@@ -30,7 +30,7 @@ public class EditNoteActivity extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(getBaseContext(), "", null, -1);
 
-        currentNote = dbHelper.getNote(getIntent().getExtras().getInt(Note.COLUMN_ID));
+        currentNote = dbHelper.queryNote(getIntent().getExtras().getInt(Note.COLUMN_ID));
 
         etTitle.setText(currentNote.getTitle());
         etNote.setText(currentNote.getNote());

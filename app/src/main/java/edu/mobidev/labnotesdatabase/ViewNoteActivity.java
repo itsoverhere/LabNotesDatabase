@@ -1,49 +1,50 @@
 package edu.mobidev.labnotesdatabase;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class ViewNoteActivity extends AppCompatActivity {
 
-    public final static int REQUEST_CODE_EDIT = 0;
-
-    private TextView tvTitle;
-    private TextView tvNote;
-    private ImageButton buttonEdit;
-    private ImageButton buttonDelete;
+    private EditText etTitle, etNote;
+    private ImageButton buttonAccept, buttonDelete, buttonCancel;
 
     private DatabaseHelper dbHelper;
     private Note currentNote;
-
-    boolean isNoteEdited = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_note);
 
-        tvTitle = (TextView) findViewById(R.id.tv_title);
-        tvNote = (TextView) findViewById(R.id.tv_note);
-        buttonEdit = (ImageButton) findViewById(R.id.button_edit);
+        etTitle = (EditText) findViewById(R.id.et_title);
+        etNote = (EditText) findViewById(R.id.et_note);
+        buttonAccept = (ImageButton) findViewById(R.id.button_accept);
+        buttonCancel = (ImageButton) findViewById(R.id.button_cancel);
         buttonDelete = (ImageButton) findViewById(R.id.button_delete);
 
-        dbHelper = new DatabaseHelper(getBaseContext(), "", null, -1);
-        // last 3 parameters will be overridden in DatabaseHelper's constructor
+        dbHelper = new DatabaseHelper(getBaseContext());
 
-        currentNote = dbHelper.getNote(getIntent().getExtras().getInt(Note.COLUMN_ID));
+        currentNote = dbHelper.queryNote(getIntent().getExtras().getInt(Note.COLUMN_ID));
 
-        buttonEdit.setOnClickListener(new View.OnClickListener() {
+        buttonAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), EditNoteActivity.class);
-                intent.putExtra(Note.COLUMN_ID, currentNote.getId());
-                startActivityForResult(intent, REQUEST_CODE_EDIT);
+                String title = etTitle.getText().toString();
+                String note = etNote.getText().toString();
+                dbHelper.updateNote(new Note(currentNote.getId(), title, note));
+                finish();
+            }
+        });
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateTextViewDisplay();
             }
         });
 
@@ -59,26 +60,8 @@ public class ViewNoteActivity extends AppCompatActivity {
     }
 
     public void updateTextViewDisplay(){
-        tvTitle.setText(currentNote.getTitle());
-        tvNote.setText(currentNote.getNote());
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE_EDIT && resultCode == RESULT_OK){
-            isNoteEdited = true; // set to true so the list in MainActivity will also refresh after finish()
-            currentNote = dbHelper.getNote(currentNote.getId()); // update the currentNote
-            updateTextViewDisplay(); // update the display for the user to see
-        }
-    }
-
-    @Override
-    public void finish() {
-        if(isNoteEdited) {
-            setResult(MainActivity.RESULT_EDITED);
-        }
-        super.finish();
+        etTitle.setText(currentNote.getTitle());
+        etNote.setText(currentNote.getNote());
     }
 
     @Override

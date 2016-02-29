@@ -21,6 +21,11 @@ public class Note{
         this.note = note;
     }
 
+    public Note(String title, String note) {
+        this.title = title;
+        this.note = note;
+    }
+
     public int getId() {
         return id;
     }

@@ -16,7 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String SCHEMA = "notebook";
     public static int VERSION = 1;
 
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public DatabaseHelper(Context context) {
         super(context, SCHEMA, null, VERSION);
     }
 
@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         // this method will be called when the version is incremented
     }
 
-    public void addNote(Note n){
+    public void insertNote(Note n){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Note.COLUMN_TITLE, n.getTitle());
@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    public Note getNote(int id){
+    public Note queryNote(int id){
         SQLiteDatabase db = getReadableDatabase();
         Note note = new Note();
         Cursor cursor = db.query(Note.TABLE_NAME, null,
@@ -76,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    public ArrayList<Note> getAllNotes(){
+    public ArrayList<Note> queryAllNotes(){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(Note.TABLE_NAME, null,
                 null, null, null, null, null, null);
@@ -94,5 +94,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         cursor.close();
         db.close();
         return noteArrayList;
+    }
+
+    public Cursor queryAllNotesAsCursor(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(Note.TABLE_NAME, null,
+                null, null, null, null, null, null);
+
+        return cursor;
     }
 }
