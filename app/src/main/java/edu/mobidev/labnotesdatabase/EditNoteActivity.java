@@ -28,7 +28,7 @@ public class EditNoteActivity extends AppCompatActivity {
         buttonSave = (ImageButton) findViewById(R.id.button_save);
         buttonCancel = (ImageButton) findViewById(R.id.button_cancel);
 
-        dbHelper = new DatabaseHelper(getBaseContext(), "", null, -1);
+        dbHelper = new DatabaseHelper(getBaseContext());
 
         currentNote = dbHelper.queryNote(getIntent().getExtras().getInt(Note.COLUMN_ID));
 

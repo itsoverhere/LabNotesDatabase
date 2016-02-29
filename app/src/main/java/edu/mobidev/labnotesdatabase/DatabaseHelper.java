@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String SCHEMA = "notebook";
-    public static int VERSION = 1;
+    public static int VERSION = 3;
 
     public DatabaseHelper(Context context) {
         super(context, SCHEMA, null, VERSION);

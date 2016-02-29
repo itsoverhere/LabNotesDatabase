@@ -37,7 +37,7 @@ public class NoteCursorAdapter extends CursorRecyclerViewAdapter<NoteCursorAdapt
 
     @Override
     public NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item, parent, false);
         return new NoteViewHolder(v);
     }
 

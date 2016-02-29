@@ -5,7 +5,7 @@ package edu.mobidev.labnotesdatabase;
  */
 public class Note{
     public static final String TABLE_NAME = "note";
-    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_NOTE = "note";
 

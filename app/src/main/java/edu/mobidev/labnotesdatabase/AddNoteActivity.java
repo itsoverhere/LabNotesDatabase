@@ -22,7 +22,7 @@ public class AddNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
 
-        dbHelper = new DatabaseHelper(getBaseContext(), "", null, -1);
+        dbHelper = new DatabaseHelper(getBaseContext());
         // last 3 parameters will be overridden in DatabaseHelper's constructor
 
         etTitle = (EditText) findViewById(R.id.et_title);
